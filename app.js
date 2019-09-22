@@ -7,6 +7,7 @@ const expressValidator = require('express-validator')
 require('dotenv').config()
 
 // import router
+const authRouter = require('./routes/auth')
 const userRouter = require('./routes/user')
 
 const app = express()
@@ -23,10 +24,17 @@ mongoose
     console.log('db connection')
   })
 
-// routes middleware
-app.use('/api', userRouter)
+// middleware
+
+app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(cookieParser())
+app.use(expressValidator())
+
+// routes middleware
+app.use('/api', authRouter)
+app.use('/api', userRouter)
+
 // app.use(expressValidator())
 const port = process.env.PORT || 8000
 

@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      unique: 32
+      unique: true
     },
     hashed_password: {
       type: String,
@@ -24,9 +24,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true
     },
-
     salt: String,
-
     role: {
       type: Number,
       default: 0
@@ -36,12 +34,11 @@ const userSchema = new mongoose.Schema(
       default: []
     }
   },
-  {
-    timestamps: true
-  }
+  { timestamps: true }
 )
 
 // virtual field
+
 userSchema
   .virtual('password')
   .set(function (password) {
@@ -54,9 +51,12 @@ userSchema
   })
 
 userSchema.methods = {
+  authenticate: function (plainText) {
+    return this.encryptPassword(plainText) === this.hashed_password
+  },
+
   encryptPassword: function (password) {
-    if (!password) {
-    }
+    if (!password) return ''
     try {
       return crypto
         .createHmac('sha1', this.salt)
@@ -67,4 +67,5 @@ userSchema.methods = {
     }
   }
 }
-module.exports = mongoose.model('user', userSchema)
+
+module.exports = mongoose.model('User', userSchema)
