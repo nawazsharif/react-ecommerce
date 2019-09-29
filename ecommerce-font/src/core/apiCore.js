@@ -27,7 +27,7 @@ export const getFilteredProducts = (skip, limit, filters = {}) => {
     skip,
     filters
   };
-  return fetch(`${API}/products/by/search`, {
+  return fetch(`${API}/product/by/search`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -45,8 +45,16 @@ export const getFilteredProducts = (skip, limit, filters = {}) => {
 
 export const list = params => {
   const query = queryString.stringify(params);
-  console.log("query", query);
   return fetch(`${API}/products/search?${query}`, {
+    method: "GET"
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+export const read = productId => {
+  return fetch(`${API}/product/${productId}`, {
     method: "GET"
   })
     .then(response => {

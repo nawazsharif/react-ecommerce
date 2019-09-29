@@ -13,7 +13,7 @@ const {
   listRelated,
   listCategories,
   listBySearch,
-  photo
+  photo, listSearch
 } = require('../controllers/product')
 const { userById } = require('../controllers/user')
 
@@ -44,6 +44,8 @@ router.get('/products/related/:productId', listRelated)
 router.get('/products/categories', listCategories)
 // route - make sure its post
 router.post('/product/by/search', listBySearch)
+// route - make sure its
+router.get('/products/search', listSearch)
 // route - product photo
 router.get('/product/photo/:productId', photo)
 
