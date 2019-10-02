@@ -32,3 +32,15 @@
 [0928/173556.763:ERROR:crash_report_database_win.cc(445)] failed to read records
 [0928/184301.084:ERROR:file_io.cc(89)] ReadExactly: expected 3976, observed 0
 [0928/184301.085:ERROR:crash_report_database_win.cc(445)] failed to read records
+[0930/001222.073:ERROR:file_io.cc(89)] ReadExactly: expected 3976, observed 0
+[0930/001222.073:ERROR:crash_report_database_win.cc(445)] failed to read records
+[0930/231401.845:ERROR:file_io.cc(89)] ReadExactly: expected 3976, observed 0
+[0930/231401.850:ERROR:crash_report_database_win.cc(445)] failed to read records
+[0930/233909.202:ERROR:file_io.cc(89)] ReadExactly: expected 3976, observed 0
+[0930/233909.203:ERROR:crash_report_database_win.cc(445)] failed to read records
+[1002/221144.553:ERROR:file_io.cc(89)] ReadExactly: expected 3976, observed 0
+[1002/221144.565:ERROR:crash_report_database_win.cc(445)] failed to read records
+[1002/225626.623:ERROR:file_io.cc(89)] ReadExactly: expected 3976, observed 0
+[1002/225626.640:ERROR:crash_report_database_win.cc(445)] failed to read records
+[1003/000056.775:ERROR:file_io.cc(89)] ReadExactly: expected 3976, observed 0
+[1003/000056.776:ERROR:crash_report_database_win.cc(445)] failed to read records
