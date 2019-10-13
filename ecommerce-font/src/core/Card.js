@@ -2,10 +2,19 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import ShowImage from "./ShowImage";
 import moment from "moment";
-import { addItem } from "./cartHelpers";
+import { addItem, updateItem, removeItem } from "./cartHelpers";
 
-const Card = ({ product, showViewProductButton = true }) => {
+const Card = ({
+  product,
+  showViewProductButton = true,
+  showAddToCartButton = true,
+  cartUpdate = false,
+  showRemoveProductButton = false,
+  setRun = f => f, // default value of function
+  run = undefined // default value of undefi
+}) => {
   const [redirect, setRedirect] = useState(false);
+  const [count, setCount] = useState(product.count);
 
   const showViewButton = showViewProductButton => {
     return (
@@ -31,14 +40,34 @@ const Card = ({ product, showViewProductButton = true }) => {
     }
   };
 
-  const showAddToCartButton = () => {
+
+
+  const showAddToCart = showAddToCartButton => {
     return (
-      <button
-        onClick={addToCart}
-        className="btn btn-outline-warning mt-2 mb-2"
-      >
-        Add to cart
-            </button>
+      showAddToCartButton && (
+        <button
+          onClick={addToCart}
+          className="btn btn-outline-warning mt-2 mb-2"
+        >
+          Add to cart
+                </button>
+      )
+    );
+  };
+
+  const showRemoveButton = showRemoveProductButton => {
+    return (
+      showRemoveProductButton && (
+        <button
+          onClick={() => {
+            removeItem(product._id)
+            setRun(!run) // run useEffect in pa
+          }}
+          className="btn btn-outline-danger mt-2 mb-2"
+        >
+          Remove Product
+                </button>
+      )
     );
   };
 
@@ -48,6 +77,36 @@ const Card = ({ product, showViewProductButton = true }) => {
     ) : (
         <span className="badge badge-primary badge-pill">Out of Stock</span>
       );
+  };
+
+  const handleChange = productId => event => {
+    setRun(!run); // run useEffect in paren
+    setCount(event.target.value < 1 ? 1 : event.target.value);
+    if (event.target.value >= 1) {
+      updateItem(productId, event.target.value);
+    }
+  };
+
+  const showCartUpdateOptions = cartUpdate => {
+    return (
+      cartUpdate && (
+        <div>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text">
+                Adjust Quantity
+                            </span>
+            </div>
+            <input
+              type="number"
+              className="form-control"
+              value={count}
+              onChange={handleChange(product._id)}
+            />
+          </div>
+        </div>
+      )
+    );
   };
 
   return (
@@ -72,7 +131,11 @@ const Card = ({ product, showViewProductButton = true }) => {
 
         {showViewButton(showViewProductButton)}
 
-        {showAddToCartButton()}
+        {showAddToCart(showAddToCartButton)}
+
+        {showRemoveButton(showRemoveProductButton)}
+
+        {showCartUpdateOptions(cartUpdate)}
       </div>
     </div>
   );

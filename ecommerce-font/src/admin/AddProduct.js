@@ -14,6 +14,7 @@ const AddProduct = () => {
     shipping: "",
     quantity: "",
     photo: "",
+    varients: [],
     loading: false,
     error: "",
     createdProduct: "",
@@ -164,6 +165,9 @@ const AddProduct = () => {
           className="form-control"
           value={quantity}
         />
+      </div>
+      <div className="form-group">
+        <button className="btn btn-outline-primary">Create Attributes</button>
       </div>
 
       <button className="btn btn-outline-primary">Create Product</button>
